@@ -1,0 +1,22 @@
+Date,Task Title,Description,Hours
+01/07/2025,Project Setup,Next.js project setup with folder structure and dependencies (Three.js),2
+01/07/2025,3D World Building,Built road chunks and 3D environment using Three.js,3
+02/07/2025,3D World Building,Sky texture and lighting setup (hemisphere + directional light),2
+02/07/2025,Vehicle System,Created vehicle meshes - car / truck / bus / motorbike / cyclist,4
+03/07/2025,Vehicle System,Vehicle movement logic and lane positioning,3
+03/07/2025,Game Logic,Core game loop - timer / scoring / hazard spawning system,3
+04/07/2025,Game Logic,Hazard state machine (pending / dev / missed / retreat / done),4
+04/07/2025,Game Logic,Player click detection using Three.js Raycaster,2
+05/07/2025,Game Logic,Speed follow logic - player car follows traffic naturally,2
+05/07/2025,UI - Start Screen,Home screen with name input and Start Test button,2
+05/07/2025,UI - HUD,In-game HUD showing player name / timer / score,2
+06/07/2025,UI - Popups,Floating +30 score popup and Hazard Missed toast notification,2
+06/07/2025,UI - Results Modal,End screen showing score / hazards stopped / missed / duration,2
+06/07/2025,UI - Results Modal,Added percentage score display alongside points in one row,1
+07/07/2025,PDF Report,Integrated jsPDF library for client-side PDF generation,2
+07/07/2025,PDF Report,Designed PDF layout - score cards / breakdown table / progress bar / feedback,3
+08/07/2025,Responsive Design,Full mobile responsiveness - HUD overflow / modal / toast / dvh fix,3
+08/07/2025,Responsive Design,Mobile breakpoints for all screens (560px) - score size / padding / buttons,2
+09/07/2025,Bug Fixes & Polish,UI fixes - score and percentage inline / label font size / description typo fix,2
+09/07/2025,Testing,Cross device testing on mobile and laptop - layout and game flow,2
+,,Total Hours,50

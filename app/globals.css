@@ -1,0 +1,354 @@
+:root {
+  --sign: #0b3d91;
+  --ink: #f4f6f8;
+  --muted: #aab4bf;
+  --panel: rgba(14, 20, 28, 0.82);
+  --ok: #4cc38a;
+  --warn: #f2b632;
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+  min-height: 100dvh;
+  background: #0c1118;
+  color: var(--ink);
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+button,
+input {
+  font: inherit;
+}
+.start {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: radial-gradient(120% 90% at 50% 0, #27384b 0, #0c1118 70%);
+}
+.start-card {
+  width: min(480px, 100%);
+  padding: 36px 32px;
+  border-radius: 14px;
+  background: var(--panel);
+  border: 1px solid #ffffff1f;
+  box-shadow: 0 30px 80px #000a;
+  animation: rise 0.6s ease;
+}
+.plate {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 4px;
+  background: var(--sign);
+  border: 2px solid #fff;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+h1 {
+  margin: 18px 0 10px;
+  font-size: clamp(1.4rem, 5vw, 2.2rem);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.start-card p {
+  margin: 0 0 22px;
+  color: var(--muted);
+  line-height: 1.55;
+  max-width: 60ch;
+}
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 1rem;
+  color: var(--muted);
+}
+input {
+  width: 100%;
+  padding: 13px 14px;
+  border-radius: 8px;
+  border: 1px solid #ffffff30;
+  background: #0a0f15;
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+input:focus-visible,
+.btn:focus-visible {
+  outline: 3px solid var(--warn);
+  outline-offset: 2px;
+}
+.btn {
+  width: 100%;
+  padding: 14px 20px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--warn);
+  color: #1a1405;
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition:
+    transform 0.15s,
+    filter 0.15s;
+}
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.btn.ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid #ffffff40;
+}
+.stage {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  overflow: hidden;
+  cursor: crosshair;
+  touch-action: manipulation;
+  animation: fade 1s ease;
+}
+.canvas,
+.canvas canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 55%, transparent 55%, #0003 100%);
+}
+.dash {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 11%;
+  pointer-events: none;
+  background: linear-gradient(#0000, #07090cdd 55%, #050608);
+}
+.mirror {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(24vw, 260px);
+  height: 5.5vh;
+  transform: translateX(-50%);
+  pointer-events: none;
+  border-radius: 0 0 22px 22px;
+  background: linear-gradient(#0b0d10, #1b2128);
+  box-shadow: 0 4px 14px #0008;
+}
+.hud {
+  position: absolute;
+  top: calc(10px + env(safe-area-inset-top));
+  left: 12px;
+  right: 12px;
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+  pointer-events: none;
+}
+.hud-name {
+  margin-right: auto;
+  align-self: center;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #0008;
+  font-size: 0.85rem;
+  color: #dfe5ea;
+  max-width: 38vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hud-box {
+  min-width: 62px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: #0b1118b8;
+  backdrop-filter: blur(6px);
+  display: grid;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.hud-box small {
+  font-size: 0.65rem;
+  color: var(--muted);
+}
+.hud-box b {
+  font-size: 1.2rem;
+}
+.float {
+  position: absolute;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--ok);
+  text-shadow: 0 2px 8px #000;
+  animation: float 1s ease-out forwards;
+}
+.toast {
+  position: absolute;
+  left: 50%;
+  bottom: 16%;
+  transform: translateX(-50%);
+  padding: 12px 20px;
+  border-radius: 10px;
+  background: #7d1f1fee;
+  border: 1px solid #ffffff40;
+  text-align: center;
+  box-shadow: 0 8px 30px #0008;
+  animation: pop 0.25s ease;
+  pointer-events: none;
+  white-space: nowrap;
+  max-width: 90vw;
+  white-space: normal;
+}
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: #05080ccc;
+  backdrop-filter: blur(6px);
+  animation: fade 0.4s ease;
+}
+.modal {
+  width: min(440px, 100%);
+  padding: 30px;
+  border-radius: 14px;
+  background: #111922;
+  border: 1px solid #ffffff22;
+  box-shadow: 0 30px 80px #000a;
+  animation: pop 0.35s ease;
+  overflow-y: auto;
+  max-height: 95dvh;
+}
+.modal h2 {
+  margin: 0 0 6px;
+  font-size: 1.3rem;
+}
+.score {
+  font-size: 3.4rem;
+  font-weight: 800;
+  color: var(--warn);
+  line-height: 1.1;
+}
+.score small {
+  font-size: 1rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+dl {
+  margin: 16px 0;
+}
+dl div {
+  display: flex;
+  justify-content: space-between;
+  padding: 9px 0;
+  border-bottom: 1px solid #ffffff18;
+}
+dt {
+  color: var(--muted);
+}
+dd {
+  margin: 0;
+  font-weight: 600;
+}
+.modal p {
+  color: #d3dae0;
+  line-height: 1.5;
+}
+.row {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    scale: 0.94;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+@keyframes float {
+  to {
+    opacity: 0;
+    margin-top: -50px;
+  }
+}
+@media (max-width: 560px) {
+  .start-card {
+    padding: 28px 20px;
+  }
+  .row {
+    flex-direction: column;
+  }
+  .mirror {
+    display: none;
+  }
+  .score {
+    font-size: 2.2rem;
+  }
+  .score small {
+    font-size: 0.85rem;
+  }
+  .modal h2 {
+    font-size: 1.1rem;
+  }
+  .modal {
+    padding: 22px 18px;
+  }
+  .hud-box small {
+    font-size: 0.6rem;
+  }
+  .hud-box b {
+    font-size: 1rem;
+  }
+  .toast {
+    font-size: 0.9rem;
+    padding: 10px 14px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+  }
+}
