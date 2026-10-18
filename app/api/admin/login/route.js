@@ -9,6 +9,6 @@ export async function POST(req){
   const ok=checkCreds(b.email,b.password);
   if(ok===null)return NextResponse.json({error:'Admin login is not configured on the server.'},{status:500});
   if(!ok){noteFail(ip);return NextResponse.json({error:'Invalid email or password.'},{status:401})}
-  clearFails(ip);createSession();
+  clearFails(ip);await createSession();
   return NextResponse.json({ok:true});
 }
