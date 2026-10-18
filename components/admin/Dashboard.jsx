@@ -4,7 +4,7 @@ import {useRouter} from 'next/navigation';
 const ld=iso=>{const d=new Date(iso);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
 const when=r=>r.completedAt?new Date(r.completedAt):null;
 const avg=(a,k)=>a.length?a.reduce((s,r)=>s+r[k],0)/a.length:0;
-const SORTS={'date-desc':(a,b)=>(b.completedAt||'').localeCompare(a.completedAt||''),'date-asc':(a,b)=>(a.completedAt||'').localeCompare(b.completedAt||''),
+const SORTS={'date-desc':(a,b)=>(b.completedAt||0)-(a.completedAt||0),'date-asc':(a,b)=>(a.completedAt||0)-(b.completedAt||0),
   'score-desc':(a,b)=>b.score-a.score,'score-asc':(a,b)=>a.score-b.score,'pct-desc':(a,b)=>b.pct-a.pct,'pct-asc':(a,b)=>a.pct-b.pct,
   'name-asc':(a,b)=>a.name.localeCompare(b.name),'name-desc':(a,b)=>b.name.localeCompare(a.name)};
 export default function Dashboard(){
